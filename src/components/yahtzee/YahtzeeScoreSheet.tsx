@@ -9,32 +9,32 @@ import {
 } from 'react-icons/gi';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { PlayerColumn } from './YahtzeePlayerColumn';
-import { Player } from '../../models/player';
-import { Game } from '../../models/game';
+import { YahtzeePlayer } from '../../games/yahtzee/YahtzeePlayer';
+import { YahtzeeGame } from '../../games/yahtzee/YahtzeeGame';
 import { Mobile, Default } from '../Responsive';
 import { GameContext } from '../../hooks/useGame';
 
 export const ScoreSheet: React.FC = () => {
   const { game, updateGame } = useContext(GameContext);
 
-  const updatePlayer = (player: Player) => {
+  const updatePlayer = (player: YahtzeePlayer) => {
     if (game) {
       game.updatePlayer(player);
-      updateGame(new Game(game));
+      updateGame(new YahtzeeGame(game));
     }
   };
 
   const nextPlayer = () => {
     if (game) {
       game.changePlayerIndex(1);
-      updateGame(new Game(game));
+      updateGame(new YahtzeeGame(game));
     }
   };
 
   const prevPlayer = () => {
     if (game) {
       game.changePlayerIndex(-1);
-      updateGame(new Game(game));
+      updateGame(new YahtzeeGame(game));
     }
   };
 

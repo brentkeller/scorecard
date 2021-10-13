@@ -4,7 +4,7 @@ import { Button } from '../components/Button';
 import { GameMenu } from '../components/GameMenu';
 import { ScoreSheet } from '../components/yahtzee/YahtzeeScoreSheet';
 import { saveGame, GameContext, loadGame } from '../hooks/useGame';
-import { Game } from '../models/game';
+import { YahtzeeGame } from '../games/yahtzee/YahtzeeGame';
 
 interface GamePageParams {
   gameId: string;
@@ -13,10 +13,10 @@ interface GamePageParams {
 export const YahtzeePage = () => {
   let { gameId } = useParams<GamePageParams>();
 
-  const [game, setGame] = React.useState<Game | null>(loadGame(gameId));
+  const [game, setGame] = React.useState<YahtzeeGame | null>(loadGame(gameId));
   const [menuVisible, setMenuVisible] = React.useState(false);
 
-  const updateGame = (game: Game) => {
+  const updateGame = (game: YahtzeeGame) => {
     saveGame(game);
     setGame(game);
   };
@@ -25,7 +25,7 @@ export const YahtzeePage = () => {
   const hideMenu = () => setMenuVisible(false);
 
   const startNewGame = () => {
-    updateGame(new Game());
+    updateGame(new YahtzeeGame());
     showMenu();
   };
 

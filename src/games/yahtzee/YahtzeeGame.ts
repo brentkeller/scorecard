@@ -1,14 +1,14 @@
 import { v4 as uuid } from 'uuid';
 
-import { Player } from './player';
+import { YahtzeePlayer } from './YahtzeePlayer';
 
-export class Game {
+export class YahtzeeGame {
   id: string;
   date: Date;
-  players: Player[];
+  players: YahtzeePlayer[];
   currentPlayerIndex: number;
 
-  constructor(game?: Game | null) {
+  constructor(game?: YahtzeeGame | null) {
     if (game) {
       this.id = game.id;
       this.date = game.date;
@@ -23,27 +23,27 @@ export class Game {
   }
 
   static createGame(id: string) {
-    return new Game({
+    return new YahtzeeGame({
       id,
       date: new Date(),
-      players: [] as Player[],
+      players: [] as YahtzeePlayer[],
       currentPlayerIndex: 0,
-    } as Game);
+    } as YahtzeeGame);
   }
 
-  addPlayer(player: Player) {
+  addPlayer(player: YahtzeePlayer) {
     if (!this.players) this.players = [];
     this.players.push(player);
   }
 
-  removePlayer(player: Player) {
+  removePlayer(player: YahtzeePlayer) {
     const index = this.players.findIndex((p) => p.id === player.id);
     this.players.splice(index, 1);
     this.currentPlayerIndex = 0;
     //if (this.currentPlayerIndex >= this.players.length) this.currentPlayerIndex--;
   }
 
-  updatePlayer(player: Player) {
+  updatePlayer(player: YahtzeePlayer) {
     const index = this.players.findIndex((p) => p.id === player.id);
     this.players[index] = player;
   }

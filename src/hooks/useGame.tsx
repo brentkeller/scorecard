@@ -1,6 +1,6 @@
 import React from 'react';
-import { Game } from '../models/game';
-import { PlayerData, Player } from '../models/player';
+import { YahtzeeGame } from '../games/yahtzee/YahtzeeGame';
+import { YahtzeePlayerData, YahtzeePlayer } from '../games/yahtzee/YahtzeePlayer';
 
 const storageKey = 'yahtzeegame';
 
@@ -15,22 +15,23 @@ export const loadGame = (id: string) => {
   if (!data) return null;
   const game = JSON.parse(data);
   // rehydrate class instances
-  game.players = game.players.map((p: PlayerData) => Player.fromData(p));
-  return new Game(game);
+  // TODO: Move this into the game class, possibly with generic type?
+  game.players = game.players.map((p: YahtzeePlayerData) => YahtzeePlayer.fromData(p));
+  return new YahtzeeGame(game);
 };
 
-export const saveGame = (game: Game) => {
+export const saveGame = (game: YahtzeeGame) => {
   localStorage.setItem(getStorageKey(game.id), JSON.stringify(game));
 };
 
 interface IGameContext {
-  game: Game | null;
-  updateGame: (game: Game) => void;
+  game: YahtzeeGame | null;
+  updateGame: (game: YahtzeeGame) => void;
 }
 
 export const GameContext = React.createContext<IGameContext>({
   game: null,
-  updateGame: (game: Game | null) => {
+  updateGame: (game: YahtzeeGame | null) => {
     return;
   },
 });

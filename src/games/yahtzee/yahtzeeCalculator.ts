@@ -1,12 +1,12 @@
-import { PlayerScores } from './player';
+import { YahtzeePlayerScores } from './YahtzeePlayer';
 
-const getScoreValue = (scores: PlayerScores, name: string): number => {
+const getScoreValue = (scores: YahtzeePlayerScores, name: string): number => {
   return scores[name] || 0;
 };
 
-const sumFields = (scores: PlayerScores, fields: string[]): number => {
+const sumFields = (scores: YahtzeePlayerScores, fields: string[]): number => {
   let sum = 0;
-  fields.forEach(x => (sum += +getScoreValue(scores, x)));
+  fields.forEach((x) => (sum += +getScoreValue(scores, x)));
   return sum;
 };
 
@@ -21,7 +21,7 @@ const lowerNumberFields = [
   'chance',
 ];
 
-export const calculateScores = (scores: PlayerScores): PlayerScores => {
+export const calculateScores = (scores: YahtzeePlayerScores): YahtzeePlayerScores => {
   scores.numbersTotal = sumFields(scores, upperNumberFields);
   scores.numbersBonus = scores.numbersTotal >= 63 ? 35 : undefined;
   scores.upperTotal = scores.numbersTotal + getScoreValue(scores, 'numbersBonus');
@@ -30,7 +30,7 @@ export const calculateScores = (scores: PlayerScores): PlayerScores => {
   return scores;
 };
 
-const calculateYahtzeeBonuses = (scores: PlayerScores): number => {
+const calculateYahtzeeBonuses = (scores: YahtzeePlayerScores): number => {
   if (getScoreValue(scores, 'yahtzee') === 0) return 0;
   let bonusTotal = 0;
   if (scores.yahtzeeBonus1 === 1) bonusTotal += 100;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { InputCell } from '../InputCell';
 import { YahtzeeBonusInput } from './YahtzeeBonusInput';
-import { Player } from '../../models/player';
+import { YahtzeePlayer } from '../../games/yahtzee/YahtzeePlayer';
 
 interface IPlayerColumn {
-  player: Player;
-  updatePlayer: (player: Player) => void;
+  player: YahtzeePlayer;
+  updatePlayer: (player: YahtzeePlayer) => void;
 }
 
 export const PlayerColumn: React.FC<IPlayerColumn> = ({ player, updatePlayer }) => {

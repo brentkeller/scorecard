@@ -1,8 +1,8 @@
-import { calculateScores } from './scoreCalculator';
-import { PlayerScores } from './player';
+import { calculateScores } from './yahtzeeCalculator';
+import { YahtzeePlayerScores } from './YahtzeePlayer';
 
-let scores: PlayerScores;
-beforeEach(() => (scores = new PlayerScores()));
+let scores: YahtzeePlayerScores;
+beforeEach(() => (scores = new YahtzeePlayerScores()));
 
 describe('calculateScores adds upper number values to totals', () => {
   it('includes ones', () => {

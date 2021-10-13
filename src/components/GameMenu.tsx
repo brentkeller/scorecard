@@ -2,8 +2,8 @@ import React, { useContext, useState } from 'react';
 //import { useSpring, animated } from 'react-spring';
 import { MdClose, MdAddCircle, MdRemoveCircle } from 'react-icons/md';
 import './GameMenu.css';
-import { Game } from '../models/game';
-import { Player } from '../models/player';
+import { YahtzeeGame } from '../games/yahtzee/YahtzeeGame';
+import { YahtzeePlayer } from '../games/yahtzee/YahtzeePlayer';
 import { Button } from './Button';
 import { GameContext } from '../hooks/useGame';
 
@@ -20,7 +20,7 @@ export const GameMenu: React.FC<IGameMenu> = (props) => {
   //   transform: props.isOpen ? `translate3d(0,0,0)` : `translate3d(0,-1000px,  0)`,
   // });
 
-  const getGame = () => game || new Game();
+  const getGame = () => game || new YahtzeeGame();
 
   const closeMenu = () => {
     props.onClose();
@@ -28,13 +28,13 @@ export const GameMenu: React.FC<IGameMenu> = (props) => {
 
   const startNewGame = () => {
     // TODO: make this create a new game and navigate to that route
-    updateGame(new Game());
+    updateGame(new YahtzeeGame());
   };
 
   const resetGame = () => {
     const _game = getGame();
     _game.reset();
-    updateGame(new Game(_game));
+    updateGame(new YahtzeeGame(_game));
   };
 
   const containerClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -43,21 +43,21 @@ export const GameMenu: React.FC<IGameMenu> = (props) => {
 
   const addPlayer = () => {
     const _game = getGame();
-    _game.addPlayer(new Player(newPlayerName));
-    updateGame(new Game(_game));
+    _game.addPlayer(new YahtzeePlayer(newPlayerName));
+    updateGame(new YahtzeeGame(_game));
     setNewPlayerName('');
   };
 
-  const removePlayer = (player: Player) => {
+  const removePlayer = (player: YahtzeePlayer) => {
     game?.removePlayer(player);
-    updateGame(new Game(game));
+    updateGame(new YahtzeeGame(game));
   };
 
-  const playerNameChange = (event: React.ChangeEvent<HTMLInputElement>, player: Player) => {
+  const playerNameChange = (event: React.ChangeEvent<HTMLInputElement>, player: YahtzeePlayer) => {
     player.name = event.target.value;
     const _game = getGame();
     _game.updatePlayer(player);
-    updateGame(new Game(_game));
+    updateGame(new YahtzeeGame(_game));
   };
 
   const newPlayerNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {

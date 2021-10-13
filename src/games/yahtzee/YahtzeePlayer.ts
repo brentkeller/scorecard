@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
-import { calculateScores } from './scoreCalculator';
+import { calculateScores } from './yahtzeeCalculator';
 
-export class PlayerScores {
+export class YahtzeePlayerScores {
   ones?: number;
   twos?: number;
   threes?: number;
@@ -27,21 +27,21 @@ export class PlayerScores {
   [key: string]: number | undefined; // Index signature
 }
 
-export interface PlayerData {
+export interface YahtzeePlayerData {
   id: string;
   name: string;
-  scores: PlayerScores;
+  scores: YahtzeePlayerScores;
 }
 
-export class Player {
+export class YahtzeePlayer {
   id: string;
   name: string;
-  scores: PlayerScores;
+  scores: YahtzeePlayerScores;
 
   constructor(name: string) {
     this.id = uuid();
     this.name = name;
-    this.scores = new PlayerScores();
+    this.scores = new YahtzeePlayerScores();
   }
 
   updateScore(fieldName: string, value?: number) {
@@ -57,10 +57,10 @@ export class Player {
   }
 
   reset() {
-    this.scores = new PlayerScores();
+    this.scores = new YahtzeePlayerScores();
   }
 
-  static fromData(p: PlayerData) {
+  static fromData(p: YahtzeePlayerData) {
     const newPlayer = new this(p.name);
     newPlayer.id = p.id;
     newPlayer.scores = p.scores;
