@@ -1,4 +1,4 @@
-import { v4 as uuid } from 'uuid';
+import { Player } from '../Player';
 import { calculateScores } from './yahtzeeCalculator';
 
 export class YahtzeePlayerScores {
@@ -33,14 +33,11 @@ export interface YahtzeePlayerData {
   scores: YahtzeePlayerScores;
 }
 
-export class YahtzeePlayer {
-  id: string;
-  name: string;
+export class YahtzeePlayer extends Player {
   scores: YahtzeePlayerScores;
 
   constructor(name: string) {
-    this.id = uuid();
-    this.name = name;
+    super(name);
     this.scores = new YahtzeePlayerScores();
   }
 
