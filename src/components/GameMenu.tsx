@@ -1,40 +1,48 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 //import { useSpring, animated } from 'react-spring';
 import { MdClose, MdAddCircle, MdRemoveCircle } from 'react-icons/md';
 import './GameMenu.css';
-import { YahtzeeGame } from '../games/yahtzee/YahtzeeGame';
-import { YahtzeePlayer } from '../games/yahtzee/YahtzeePlayer';
+import { Player } from '../games/Player';
 import { Button } from './Button';
-import { GameContext } from '../hooks/useGame';
+import { Game } from '../games/Game';
 
-interface IGameMenu {
+interface IGameMenu<T extends Game> {
+  game: T;
+  updateGame: (game: T) => void;
   isOpen: boolean;
+  newGame: () => void;
   onClose: () => void;
 }
 
-export const GameMenu: React.FC<IGameMenu> = (props) => {
-  // TODO: Export a useGame hook instead of needing useContext
-  const { game, updateGame } = useContext(GameContext);
+export function GameMenu<T extends Game>({
+  game,
+  updateGame,
+  isOpen,
+  newGame,
+  onClose,
+}: IGameMenu<T>) {
+  // TODO: Make this nicer than passing in the pieces of the GameContext?
+  // TODO: (old) Export a useGame hook instead of needing useContext
+  // const { game, updateGame } = useContext(GameContext);
   const [newPlayerName, setNewPlayerName] = useState('');
   // const open = useSpring({
   //   transform: props.isOpen ? `translate3d(0,0,0)` : `translate3d(0,-1000px,  0)`,
   // });
 
-  const getGame = () => game || new YahtzeeGame();
+  const getGame = () => game;
 
   const closeMenu = () => {
-    props.onClose();
+    onClose();
   };
 
   const startNewGame = () => {
-    // TODO: make this create a new game and navigate to that route
-    updateGame(new YahtzeeGame());
+    newGame();
   };
 
   const resetGame = () => {
     const _game = getGame();
     _game.reset();
-    updateGame(new YahtzeeGame(_game));
+    updateGame(_game);
   };
 
   const containerClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -43,21 +51,21 @@ export const GameMenu: React.FC<IGameMenu> = (props) => {
 
   const addPlayer = () => {
     const _game = getGame();
-    _game.addPlayer(new YahtzeePlayer(newPlayerName));
-    updateGame(new YahtzeeGame(_game));
+    _game.addPlayer(newPlayerName);
+    updateGame(_game);
     setNewPlayerName('');
   };
 
-  const removePlayer = (player: YahtzeePlayer) => {
+  const removePlayer = (player: Player) => {
     game?.removePlayer(player);
-    updateGame(new YahtzeeGame(game));
+    updateGame(game);
   };
 
-  const playerNameChange = (event: React.ChangeEvent<HTMLInputElement>, player: YahtzeePlayer) => {
+  const playerNameChange = (event: React.ChangeEvent<HTMLInputElement>, player: Player) => {
     player.name = event.target.value;
     const _game = getGame();
     _game.updatePlayer(player);
-    updateGame(new YahtzeeGame(_game));
+    updateGame(_game);
   };
 
   const newPlayerNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,7 +107,9 @@ export const GameMenu: React.FC<IGameMenu> = (props) => {
                     />
                   </div>
                   <div className="game-menu__player-score game-menu__player-score-value">
-                    {p.scores.total || 0}
+                    {/*
+                    TODO: Make a player.score method to summarize a score
+                     {p.scores.total || 0} */}
                   </div>
                   <div className="game-menu__player-action">
                     <MdRemoveCircle onClick={() => removePlayer(p)} className="remove-player" />
@@ -127,4 +137,4 @@ export const GameMenu: React.FC<IGameMenu> = (props) => {
     </div>
     // </animated.div>
   );
-};
+}

@@ -3,23 +3,27 @@ import { Game } from '../Game';
 
 import { YahtzeePlayer } from './YahtzeePlayer';
 
-export class YahtzeeGame extends Game<YahtzeePlayer> {
-  constructor(game?: YahtzeeGame | null) {
-    super(game?.id ?? uuid(), 'yahtzee');
+export class YahtzeeGame extends Game {
+  players!: YahtzeePlayer[];
+
+  static fromGame(game: Game) {
+    const newGame = new YahtzeeGame(game.id);
     if (game) {
-      this.date = game.date;
-      this.players = game.players;
-      this.currentPlayerIndex = game.currentPlayerIndex;
+      newGame.date = game.date;
+      newGame.currentPlayerIndex = game.currentPlayerIndex;
+      newGame.players = (game.players as YahtzeePlayer[]).map((p) => YahtzeePlayer.fromData(p));
     }
+    return newGame;
   }
 
-  static createGame(id: string) {
-    return new YahtzeeGame({
-      id,
-      date: new Date(),
-      players: [] as YahtzeePlayer[],
-      currentPlayerIndex: 0,
-    } as YahtzeeGame);
+  constructor(id?: string) {
+    super(id ?? uuid(), 'yahtzee');
+    this.players = [];
+  }
+
+  addPlayer(name: string) {
+    if (!this.players) this.players = [];
+    this.players.push(new YahtzeePlayer(name));
   }
 
   // TODO: Create a summary method to show basic info about the game?

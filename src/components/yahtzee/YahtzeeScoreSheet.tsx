@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   GiInvertedDice1,
   GiInvertedDice2,
@@ -12,29 +12,31 @@ import { PlayerColumn } from './YahtzeePlayerColumn';
 import { YahtzeePlayer } from '../../games/yahtzee/YahtzeePlayer';
 import { YahtzeeGame } from '../../games/yahtzee/YahtzeeGame';
 import { Mobile, Default } from '../Responsive';
-import { GameContext } from '../../hooks/useGame';
 
-export const ScoreSheet: React.FC = () => {
-  const { game, updateGame } = useContext(GameContext);
+interface IYahtzeeScoreSheet {
+  game: YahtzeeGame;
+  updateGame: (game: YahtzeeGame) => void;
+}
 
+export const ScoreSheet: React.FC<IYahtzeeScoreSheet> = ({ game, updateGame }) => {
   const updatePlayer = (player: YahtzeePlayer) => {
     if (game) {
       game.updatePlayer(player);
-      updateGame(new YahtzeeGame(game));
+      updateGame(game);
     }
   };
 
   const nextPlayer = () => {
     if (game) {
       game.changePlayerIndex(1);
-      updateGame(new YahtzeeGame(game));
+      updateGame(game);
     }
   };
 
   const prevPlayer = () => {
     if (game) {
       game.changePlayerIndex(-1);
-      updateGame(new YahtzeeGame(game));
+      updateGame(game);
     }
   };
 

@@ -2,12 +2,16 @@ import { Player } from './Player';
 
 export type GameType = 'yahtzee' | 'basic';
 
-export class Game<PlayerType extends Player> {
+export class Game {
   id: string;
   type: GameType;
   date: Date;
   currentPlayerIndex: number;
-  players: PlayerType[];
+  players: Player[];
+
+  static fromGame(game: Game) {
+    return new Game(game.id, game.type);
+  }
 
   constructor(id: string, type: GameType) {
     this.id = id;
@@ -17,19 +21,19 @@ export class Game<PlayerType extends Player> {
     this.players = [];
   }
 
-  addPlayer(player: PlayerType) {
+  addPlayer(name: string) {
     if (!this.players) this.players = [];
-    this.players.push(player);
+    this.players.push(new Player(name));
   }
 
-  removePlayer(player: PlayerType) {
+  removePlayer(player: Player) {
     const index = this.players.findIndex((p) => p.id === player.id);
     this.players.splice(index, 1);
     this.currentPlayerIndex = 0;
     //if (this.currentPlayerIndex >= this.players.length) this.currentPlayerIndex--;
   }
 
-  updatePlayer(player: PlayerType) {
+  updatePlayer(player: Player) {
     const index = this.players.findIndex((p) => p.id === player.id);
     this.players[index] = player;
   }
@@ -43,5 +47,9 @@ export class Game<PlayerType extends Player> {
 
   reset() {
     this.players.forEach((p) => p.reset());
+  }
+
+  summary() {
+    return '';
   }
 }

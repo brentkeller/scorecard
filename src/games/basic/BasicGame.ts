@@ -2,7 +2,11 @@ import { v4 as uuid } from 'uuid';
 import { Game } from '../Game';
 import { BasicPlayer } from './BasicPlayer';
 
-export class BasicGame extends Game<BasicPlayer> {
+export class BasicGame extends Game {
+  players!: BasicPlayer[];
+
+  // TODO: Implement necessary overrides of Game.ts
+
   constructor(game?: BasicGame | null) {
     super(game?.id ?? uuid(), 'basic');
     if (game) {

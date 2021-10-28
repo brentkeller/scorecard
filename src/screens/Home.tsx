@@ -1,13 +1,15 @@
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
-import { v4 as uuid } from 'uuid';
+import { YahtzeeGame } from '../games/yahtzee/YahtzeeGame';
+import { saveGame } from '../hooks/useGame';
 
 export const Home = () => {
   let history = useHistory();
 
   function newYahtzee() {
-    const gameId = uuid();
-    history.push(`/yahtzee/${gameId}`);
+    const game = new YahtzeeGame();
+    saveGame(game);
+    history.push(`/yahtzee/${game.id}`);
   }
 
   return (
