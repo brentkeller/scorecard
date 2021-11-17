@@ -21,8 +21,12 @@ export const YahtzeePage = () => {
   // using loadGame as initial value for useState loads the game more often than expected,
   // like when showing the GameMenu
   React.useEffect(() => {
-    const loaded = loadGame<YahtzeeGame>(gameId, YahtzeeGame.fromGame);
-    setGame(loaded);
+    const fetchData = async () => {
+      const loaded = await loadGame<YahtzeeGame>(gameId, YahtzeeGame.fromGame);
+      setGame(loaded);
+    };
+
+    fetchData().catch(console.error);
   }, [gameId]);
 
   if (game == null) {
