@@ -2,6 +2,13 @@ import { Player } from './Player';
 
 export type GameType = 'yahtzee' | 'basic';
 
+export interface GameInfo {
+  id: string;
+  type: GameType;
+  date: Date;
+  game: Game;
+}
+
 export class Game {
   id: string;
   type: GameType;

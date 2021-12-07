@@ -1,0 +1,40 @@
+.game-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 1fr);
+  padding: 5px;
+  gap: 10px;
+}
+
+@media (min-width: 600px) {
+  .game-list {
+    grid-template-columns: repeat(auto-fill, 400px);
+    padding: 10px;
+  }
+}
+
+.game-card {
+  border: 2px solid var(--color-brand);
+  border-radius: 6px;
+  padding: 5px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 50px auto;
+  grid-template-areas:
+    'type date date'
+    'link . delete';
+  max-width: 400px;
+}
+
+.game-card__type {
+  font-weight: bold;
+  grid-area: type;
+}
+
+.game-card__date {
+  grid-area: date;
+  text-align: right;
+}
+
+.game-card__link-button {
+  grid-area: link;
+}
