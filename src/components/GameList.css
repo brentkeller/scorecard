@@ -37,4 +37,11 @@
 
 .game-card__link-button {
   grid-area: link;
+  text-decoration: none;
+}
+
+.game-card__delete-button {
+  grid-area: delete;
+  color: red !important;
+  border-color: red !important;
 }

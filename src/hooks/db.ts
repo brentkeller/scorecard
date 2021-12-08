@@ -48,3 +48,8 @@ export async function storeGame(game: Game) {
     game,
   });
 }
+
+export async function deleteGame(id: string) {
+  const db = await getDb();
+  await db.delete('games', id);
+}
