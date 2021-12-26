@@ -1,23 +1,23 @@
 import * as React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { GameList } from '../components/GameList';
 import { BasicGame } from '../games/basic/BasicGame';
 import { YahtzeeGame } from '../games/yahtzee/YahtzeeGame';
 import { saveGame } from '../hooks/useGame';
 
 export const Home = () => {
-  let history = useHistory();
+  let navigate = useNavigate();
 
   function newBasic() {
     const game = new BasicGame();
     saveGame(game);
-    history.push(`/basic/${game.id}`);
+    navigate(`/basic/${game.id}`);
   }
 
   function newYahtzee() {
     const game = new YahtzeeGame();
     saveGame(game);
-    history.push(`/yahtzee/${game.id}`);
+    navigate(`/yahtzee/${game.id}`);
   }
 
   return (

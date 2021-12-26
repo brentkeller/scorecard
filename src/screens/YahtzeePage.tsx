@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
+import { Params, useParams } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { GameMenu } from '../components/GameMenu';
 import { ScoreSheet } from '../components/yahtzee/YahtzeeScoreSheet';
@@ -7,12 +7,12 @@ import { saveGame, createGameContext, loadGame } from '../hooks/useGame';
 import { YahtzeeGame } from '../games/yahtzee/YahtzeeGame';
 
 const GameContext = createGameContext<YahtzeeGame>();
-interface GamePageParams {
+interface GamePageParams extends Params<string> {
   gameId: string;
 }
 
 export const YahtzeePage = () => {
-  let { gameId } = useParams<GamePageParams>();
+  let { gameId } = useParams() as GamePageParams;
 
   const [game, setGame] = React.useState<YahtzeeGame | null>();
   const [menuVisible, setMenuVisible] = React.useState(false);
