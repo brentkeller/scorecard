@@ -2,7 +2,7 @@ Scorecard app
 
 # Info
 
-Node version: 14.17.0
+Node version: 14+
 
 # Data Structure
 
@@ -45,15 +45,17 @@ Bowling?
 
 # Work List
 
-http://localhost:3000/yahtzee/e58b9d8c-0622-4105-9065-18a5ccdd54f5
-
 Add XO for linting? https://github.com/xojs/xo
 
-Create game management view?
-List games in IDB
-Home should show the types of games, create new or resume last
-
 Need to update the date on each save to track most recent game (per type)
+
+Create logo & favicon
+List players on game card
+
+Game page
+
+- Add link back to home from game page
+- Change "players" button to a menu, allow resetting the game or going home
 
 PWA
 https://create-react-app.dev/docs/making-a-progressive-web-app/
