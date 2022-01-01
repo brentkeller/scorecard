@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Params, useParams } from 'react-router-dom';
+import { Params, useNavigate, useParams } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { GameMenu } from '../components/GameMenu';
 import { ScoreSheet } from '../components/yahtzee/YahtzeeScoreSheet';
@@ -13,7 +13,7 @@ interface GamePageParams extends Params<string> {
 
 export const YahtzeePage = () => {
   let { gameId } = useParams() as GamePageParams;
-
+  const navigate = useNavigate();
   const [game, setGame] = React.useState<YahtzeeGame | null>();
   const [menuVisible, setMenuVisible] = React.useState(false);
 
@@ -43,16 +43,9 @@ export const YahtzeePage = () => {
   const hideMenu = () => setMenuVisible(false);
 
   const startNewGame = () => {
-    console.log('startNewGame');
-    // TODO: create a new game and redirect to it
-    updateGame(new YahtzeeGame());
-    showMenu();
-  };
-
-  const newGame = () => {
-    console.log('TODO: Implement new game');
-    // This should be similar to how a new game is created from Home.tsx
-    // Maybe it should even just be a link to the home page instead of keeping the same game type?
+    const game = new YahtzeeGame();
+    saveGame(game);
+    navigate(`/yahtzee/${game.id}`);
   };
 
   return (
@@ -61,7 +54,7 @@ export const YahtzeePage = () => {
         <main className="app">
           <header className="header">
             <h1>Yahtzee</h1>
-            <Button onClick={showMenu}>Players</Button>
+            <Button onClick={showMenu}>Menu</Button>
           </header>
           <div className="body">
             {game ? (
@@ -79,7 +72,7 @@ export const YahtzeePage = () => {
               updateGame={updateGame}
               onClose={hideMenu}
               isOpen={menuVisible}
-              newGame={newGame}
+              newGame={startNewGame}
             />
           )}
         </main>
