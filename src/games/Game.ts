@@ -57,6 +57,7 @@ export class Game {
   }
 
   summary() {
-    return '';
+    const players = this.players.map((p) => p.name).join(', ');
+    return `Players: ${players}`;
   }
 }

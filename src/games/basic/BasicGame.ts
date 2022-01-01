@@ -31,9 +31,7 @@ export class BasicGame extends Game {
     return Math.max(...this.players.map((p) => p.turns?.length ?? 0));
   }
 
-  // TODO: Create a summary method to show basic info about the game?
-  // Maybe: # or players, rounds completed, etc.
   summary() {
-    return '';
+    return super.summary();
   }
 }

@@ -26,9 +26,7 @@ export class YahtzeeGame extends Game {
     this.players.push(new YahtzeePlayer(name));
   }
 
-  // TODO: Create a summary method to show basic info about the game?
-  // Maybe: # or players, rounds completed, etc.
   summary() {
-    return '';
+    return super.summary();
   }
 }

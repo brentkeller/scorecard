@@ -18,11 +18,16 @@
   padding: 5px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 50px auto;
+  grid-template-rows: 30px 30px auto;
   grid-template-areas:
     'type date date'
+    'summary summary summary'
     'link . delete';
   max-width: 400px;
+}
+
+.game-card__summary {
+  grid-area: summary;
 }
 
 .game-card__type {
