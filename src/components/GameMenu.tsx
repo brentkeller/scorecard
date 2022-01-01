@@ -5,6 +5,7 @@ import './GameMenu.css';
 import { Player } from '../games/Player';
 import { Button } from './Button';
 import { Game } from '../games/Game';
+import { useNavigate } from 'react-router-dom';
 
 interface IGameMenu<T extends Game> {
   game: T;
@@ -25,6 +26,7 @@ export function GameMenu<T extends Game>({
   // TODO: (old) Export a useGame hook instead of needing useContext
   // const { game, updateGame } = useContext(GameContext);
   const [newPlayerName, setNewPlayerName] = useState('');
+  const navigate = useNavigate();
   // const open = useSpring({
   //   transform: props.isOpen ? `translate3d(0,0,0)` : `translate3d(0,-1000px,  0)`,
   // });
@@ -37,6 +39,10 @@ export function GameMenu<T extends Game>({
 
   const startNewGame = () => {
     newGame();
+  };
+
+  const goHome = () => {
+    navigate('/');
   };
 
   const resetGame = () => {
@@ -83,6 +89,7 @@ export function GameMenu<T extends Game>({
         <MdClose onClick={closeMenu} className="game-menu__close" />
         <h2>Game Menu</h2>
         <div className="game-menu__buttons">
+          <Button onClick={goHome}>Home</Button>
           <Button onClick={startNewGame}>New Game</Button>
           <Button onClick={resetGame}>Reset Scores</Button>
         </div>
