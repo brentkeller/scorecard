@@ -49,17 +49,11 @@ Add XO for linting? https://github.com/xojs/xo
 
 Need to update the date on each save to track most recent game (per type)
 
-Create logo & favicon
-List players on game card
-
 Game page
 
-- Add link back to home from game page
-- Change "players" button to a menu, allow resetting the game or going home
+- Add pivot option to list players on rows instead of rounds
 
 PWA
-https://create-react-app.dev/docs/making-a-progressive-web-app/
-https://create-react-app.dev/docs/custom-templates/
 https://github.com/cra-template/pwa/tree/master/packages/cra-template-pwa-typescript
 
 # Next steps
