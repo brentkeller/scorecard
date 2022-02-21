@@ -14,6 +14,18 @@
   padding-bottom: 10px;
 }
 
+#homepage h1 {
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#homepage h2 {
+  padding: 8px;
+  margin: 0;
+}
+
 .header {
   display: flex;
   justify-content: space-between;

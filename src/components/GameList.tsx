@@ -6,6 +6,7 @@ import './GameList.css';
 import { Button } from './Button';
 import { YahtzeeGame } from '../games/yahtzee/YahtzeeGame';
 import { BasicGame } from '../games/basic/BasicGame';
+import { GameTypeHeader } from './GameTypeHeader';
 
 export function GameList() {
   const [games, setGames] = useState<GameInfo[]>([]);
@@ -32,7 +33,7 @@ export function GameList() {
 
   const gameCards = games.map((g) => (
     <div key={g.id} className="game-card">
-      <div className="game-card__type">{g.type}</div>
+      <GameTypeHeader type={g.type} />
       <div className="game-card__date">{g.date.toLocaleString()}</div>
       <div className="game-card__summary">{hydrateGame(g.game).summary()}</div>
       <Link to={`/${g.type}/${g.id}`} className="btn game-card__link-button">
